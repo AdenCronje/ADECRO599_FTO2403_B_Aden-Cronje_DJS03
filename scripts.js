@@ -75,6 +75,7 @@ document.querySelector('[data-list-button]').innerHTML = `
     <span class="list__remaining"> (${(matches.length - (page * BOOKS_PER_PAGE)) > 0 ? (matches.length - (page * BOOKS_PER_PAGE)) : 0})</span>
 `
 
+// Navigation bar, search bar section
 document.querySelector('[data-search-cancel]').addEventListener('click', () => {
     document.querySelector('[data-search-overlay]').open = false
 })
@@ -96,6 +97,7 @@ document.querySelector('[data-list-close]').addEventListener('click', () => {
     document.querySelector('[data-list-active]').open = false
 })
 
+// Dark and light mode toggle of navigation bar
 document.querySelector('[data-settings-form]').addEventListener('submit', (event) => {
     event.preventDefault()
     const formData = new FormData(event.target)
@@ -225,6 +227,7 @@ document.querySelector('[data-list-items]').addEventListener('click', (event) =>
         }
     }
     
+    // Modal appear's after a sprcific book is pressed
     if (active) {
         document.querySelector('[data-list-active]').open = true
         document.querySelector('[data-list-blur]').src = active.image
