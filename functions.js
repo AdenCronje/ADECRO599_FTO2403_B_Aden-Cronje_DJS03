@@ -26,4 +26,6 @@ const selectorElements = {
   listDescription: document.querySelector("[data-list-description]"), //(1)
 };
 
-export { callingElements, createNewElements };
+const newDocument = document.createDocumentFragment();
+
+export { callingElements, createNewElements, newDocument };

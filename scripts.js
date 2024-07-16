@@ -1,13 +1,13 @@
 import { books, authors, genres, BOOKS_PER_PAGE } from "./data.js";
-import { callingElements, createNewElements } from "./functions.js";
+import { callingElements, createNewElements, newDocument } from "./functions.";
 
 let page = 1;
 let matches = books;
 
-const starting = document.createDocumentFragment();
+const starting = newDocument;
 
 for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
-  const element = document.createElement("button");
+  const element = createNewElements("button");
   element.classList = "preview";
   element.setAttribute("data-preview", id);
 
@@ -29,14 +29,14 @@ for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
 document.querySelector("[data-list-items]").appendChild(starting);
 
 // Creates different book genre's
-const genreHtml = document.createDocumentFragment();
-const firstGenreElement = document.createElement("option");
+const genreHtml = newDocument;
+const firstGenreElement = createNewElements("option");
 firstGenreElement.value = "any";
 firstGenreElement.innerText = "All Genres";
 genreHtml.appendChild(firstGenreElement);
 
 for (const [id, name] of Object.entries(genres)) {
-  const element = document.createElement("option");
+  const element = createNewElements("option");
   element.value = id;
   element.innerText = name;
   genreHtml.appendChild(element);
@@ -45,14 +45,14 @@ for (const [id, name] of Object.entries(genres)) {
 document.querySelector("[data-search-genres]").appendChild(genreHtml);
 
 // Give's authors names for each book that's generated
-const authorsHtml = document.createDocumentFragment();
-const firstAuthorElement = document.createElement("option");
+const authorsHtml = newDocument;
+const firstAuthorElement = createNewElements("option");
 firstAuthorElement.value = "any";
 firstAuthorElement.innerText = "All Authors";
 authorsHtml.appendChild(firstAuthorElement);
 
 for (const [id, name] of Object.entries(authors)) {
-  const element = document.createElement("option");
+  const element = createNewElements("option");
   element.value = id;
   element.innerText = name;
   authorsHtml.appendChild(element);
@@ -183,13 +183,13 @@ document
     }
 
     document.querySelector("[data-list-items]").innerHTML = "";
-    const newItems = document.createDocumentFragment();
+    const newItems = newDocument;
 
     for (const { author, id, image, title } of result.slice(
       0,
       BOOKS_PER_PAGE
     )) {
-      const element = document.createElement("button");
+      const element = createNewElements("button");
       element.classList = "preview";
       element.setAttribute("data-preview", id);
 
@@ -226,13 +226,13 @@ document
   });
 
 document.querySelector("[data-list-button]").addEventListener("click", () => {
-  const fragment = document.createDocumentFragment();
+  const fragment = newDocument;
 
   for (const { author, id, image, title } of matches.slice(
     page * BOOKS_PER_PAGE,
     (page + 1) * BOOKS_PER_PAGE
   )) {
-    const element = document.createElement("button");
+    const element = createNewElements("button");
     element.classList = "preview";
     element.setAttribute("data-preview", id);
 
