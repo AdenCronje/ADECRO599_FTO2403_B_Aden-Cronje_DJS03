@@ -3,12 +3,13 @@ function createNewElements(type) {
 }
 
 const selectorElements = {
-  items: document.querySelector("[data-list-items]"), //(5)
-  genres: document.querySelector("[data-search-genres]"), //(1)
-  authors: document.querySelector("[data-search-authors]"), //(1)
-  themes: document.querySelector("[data-search-overlay]"), //(2)
+  listItems: document.querySelector("[data-list-items]"), //(5)
+  searchGenres: document.querySelector("[data-search-genres]"), //(1)
+  searchAuthors: document.querySelector("[data-search-authors]"), //(1)
+  settingsThemes: document.querySelector("[data-settings-theme]"), //(2)
   listButtons: document.querySelector("[data-list-button]"), //(6)
   cancelButton: document.querySelector("[data-search-cancel]"), //(1)
+  settingsCancel: document.querySelector("[data-settings-cancel]"), //(1)
   searchOverlay: document.querySelector("[data-search-overlay]"), //(3)
   settingsOverlay: document.querySelector("[data-settings-overlay]"), //(3)
   headerSearch: document.querySelector("[data-header-search]"), //(1)
