@@ -14,3 +14,12 @@
 *Lines 60 to 67
 *lines 79 to 98  
 *Lines 101 to 115: possible function could be implemented
+*Create a function to create new elements
+<!-- function createElement(type){
+   retrn document.createElement(type)
+} -->
+*Make an object for all querySelectors
+<!-- const getElementObject ={
+genreElement = document.createElement("option)
+} -->
+*Functions for each document.createFragment
