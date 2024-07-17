@@ -33,98 +33,56 @@ for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
 callingElements.listItems.appendChild(starting);
 
 // Creates different book genre's
-const genreHtml = newDocument;
-const firstGenreElement = createNewElements("option");
-firstGenreElement.value = "any";
-firstGenreElement.innerText = "All Genres";
-genreHtml.appendChild(firstGenreElement);
+function createGenre() {
+  const genreHtml = newDocument;
+  const firstGenreElement = createNewElements("option");
+  firstGenreElement.value = "any";
+  firstGenreElement.innerText = "All Genres";
+  genreHtml.appendChild(firstGenreElement);
 
-for (const [id, name] of Object.entries(genres)) {
-  const element = createNewElements("option");
-  element.value = id;
-  element.innerText = name;
-  genreHtml.appendChild(element);
+  for (const [id, name] of Object.entries(genres)) {
+    const element = createNewElements("option");
+    element.value = id;
+    element.innerText = name;
+    genreHtml.appendChild(element);
+  }
 }
+
+createGenre();
 
 callingElements.searchGenres.appendChild(genreHtml);
 
 // Give's authors names for each book that's generated
-const authorsHtml = newDocument;
-const firstAuthorElement = createNewElements("option");
-firstAuthorElement.value = "any";
-firstAuthorElement.innerText = "All Authors";
-authorsHtml.appendChild(firstAuthorElement);
+function createAuthor() {
+  const authorsHtml = newDocument;
+  const firstAuthorElement = createNewElements("option");
+  firstAuthorElement.value = "any";
+  firstAuthorElement.innerText = "All Authors";
+  authorsHtml.appendChild(firstAuthorElement);
 
-for (const [id, name] of Object.entries(authors)) {
-  const element = createNewElements("option");
-  element.value = id;
-  element.innerText = name;
-  authorsHtml.appendChild(element);
+  for (const [id, name] of Object.entries(authors)) {
+    const element = createNewElements("option");
+    element.value = id;
+    element.innerText = name;
+    authorsHtml.appendChild(element);
+  }
+
+  callingElements.searchAuthors.appendChild(authorsHtml);
 }
 
-callingElements.searchAuthors.appendChild(authorsHtml);
+createAuthor();
 
 // Dark and Light mode styling
-if (
-  window.matchMedia &&
-  window.matchMedia("(prefers-color-scheme: dark)").matches
-) {
-  callingElements.settingsThemes.value = "night";
-  document.documentElement.style.setProperty("--color-dark", "255, 255, 255");
-  document.documentElement.style.setProperty("--color-light", "10, 10, 20");
-} else {
-  callingElements.settingsThemes.value = "day";
-  document.documentElement.style.setProperty("--color-dark", "10, 10, 20");
-  document.documentElement.style.setProperty("--color-light", "255, 255, 255");
-}
-
-callingElements.listButtons.innerText = `Show more (${
-  books.length - BOOKS_PER_PAGE
-})`;
-callingElements.listButtons.disabled =
-  matches.length - page * BOOKS_PER_PAGE > 0;
-
-callingElements.listButtons.innerHTML = `
-    <span>Show more</span>
-    <span class="list__remaining"> (${
-      matches.length - page * BOOKS_PER_PAGE > 0
-        ? matches.length - page * BOOKS_PER_PAGE
-        : 0
-    })</span>
-`;
-
-// Navigation bar/ search bar section
-callingElements.cancelButton.addEventListener("click", () => {
-  callingElements.searchOverlay.open = false;
-});
-
-callingElements.settingsCancel.addEventListener("click", () => {
-  callingElements.settingsOverlay.open = false;
-});
-
-callingElements.headerSearch.addEventListener("click", () => {
-  callingElements.searchOverlay.open = true;
-  callingElements.searchTitle.focus();
-});
-
-callingElements.headerSettings.addEventListener("click", () => {
-  callingElements.settingsOverlay.open = true;
-});
-
-callingElements.listClose.addEventListener("click", () => {
-  callingElements.activeList.open = false;
-});
-
-// Dark and light mode toggle from navigation bar
-callingElements.settingsForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const formData = new FormData(event.target);
-  const { theme } = Object.fromEntries(formData);
-
-  if (theme === "night") {
+function stylingToggleThemes() {
+  if (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    callingElements.settingsThemes.value = "night";
     document.documentElement.style.setProperty("--color-dark", "255, 255, 255");
     document.documentElement.style.setProperty("--color-light", "10, 10, 20");
   } else {
+    callingElements.settingsThemes.value = "day";
     document.documentElement.style.setProperty("--color-dark", "10, 10, 20");
     document.documentElement.style.setProperty(
       "--color-light",
@@ -132,10 +90,79 @@ callingElements.settingsForm.addEventListener("submit", (event) => {
     );
   }
 
-  callingElements.settingsOverlay.open = false;
-});
+  callingElements.listButtons.innerText = `Show more (${
+    books.length - BOOKS_PER_PAGE
+  })`;
+  callingElements.listButtons.disabled =
+    matches.length - page * BOOKS_PER_PAGE > 0;
+
+  callingElements.listButtons.innerHTML = `
+      <span>Show more</span>
+      <span class="list__remaining"> (${
+        matches.length - page * BOOKS_PER_PAGE > 0
+          ? matches.length - page * BOOKS_PER_PAGE
+          : 0
+      })</span>
+  `;
+}
+
+stylingToggleThemes();
+
+// Handles navigation bar/modal and book eventlisteners
+function setUpEventlisteners() {
+  callingElements.cancelButton.addEventListener("click", () => {
+    callingElements.searchOverlay.open = false;
+  });
+
+  callingElements.settingsCancel.addEventListener("click", () => {
+    callingElements.settingsOverlay.open = false;
+  });
+
+  callingElements.headerSearch.addEventListener("click", () => {
+    callingElements.searchOverlay.open = true;
+    callingElements.searchTitle.focus();
+  });
+
+  callingElements.headerSettings.addEventListener("click", () => {
+    callingElements.settingsOverlay.open = true;
+  });
+
+  callingElements.listClose.addEventListener("click", () => {
+    callingElements.activeList.open = false;
+  });
+}
+
+setUpEventlisteners();
+
+// Dark and light mode toggle from navigation bar
+function toggleDarkAndLight() {
+  callingElements.settingsForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const { theme } = Object.fromEntries(formData);
+
+    if (theme === "night") {
+      document.documentElement.style.setProperty(
+        "--color-dark",
+        "255, 255, 255"
+      );
+      document.documentElement.style.setProperty("--color-light", "10, 10, 20");
+    } else {
+      document.documentElement.style.setProperty("--color-dark", "10, 10, 20");
+      document.documentElement.style.setProperty(
+        "--color-light",
+        "255, 255, 255"
+      );
+    }
+
+    callingElements.settingsOverlay.open = false;
+  });
+}
+
+toggleDarkAndLight();
 
 // Filtering search results from selected title/ genre / author
+
 callingElements.searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
@@ -161,6 +188,8 @@ callingElements.searchForm.addEventListener("submit", (event) => {
       result.push(book);
     }
   }
+
+
 
   page = 1;
   matches = result;
@@ -241,34 +270,38 @@ callingElements.listButtons.addEventListener("click", () => {
   page += 1;
 });
 
-callingElements.listItems.addEventListener("click", (event) => {
-  const pathArray = Array.from(event.path || event.composedPath());
-  let active = null;
+function selectedBook() {
+  callingElements.listItems.addEventListener("click", (event) => {
+    const pathArray = Array.from(event.path || event.composedPath());
+    let active = null;
 
-  for (const node of pathArray) {
-    if (active) break;
+    for (const node of pathArray) {
+      if (active) break;
 
-    if (node?.dataset?.preview) {
-      let result = null;
+      if (node?.dataset?.preview) {
+        let result = null;
 
-      for (const singleBook of books) {
-        if (result) break;
-        if (singleBook.id === node?.dataset?.preview) result = singleBook;
+        for (const singleBook of books) {
+          if (result) break;
+          if (singleBook.id === node?.dataset?.preview) result = singleBook;
+        }
+
+        active = result;
       }
-
-      active = result;
     }
-  }
 
-  // Modal appear's after a sprcific book is pressed
-  if (active) {
-    callingElements.activeList.open = true;
-    callingElements.listBlur.src = active.image;
-    callingElements.listImage.src = active.image;
-    callingElements.listTitle.innerText = active.title;
-    callingElements.listSubtitel.innerText = `${
-      authors[active.author]
-    } (${new Date(active.published).getFullYear()})`;
-    callingElements.listDescription.innerText = active.description;
-  }
-});
+    // Modal appear's after a sprcific book is pressed
+    if (active) {
+      callingElements.activeList.open = true;
+      callingElements.listBlur.src = active.image;
+      callingElements.listImage.src = active.image;
+      callingElements.listTitle.innerText = active.title;
+      callingElements.listSubtitel.innerText = `${
+        authors[active.author]
+      } (${new Date(active.published).getFullYear()})`;
+      callingElements.listDescription.innerText = active.description;
+    }
+  });
+}
+
+selectedBook();
