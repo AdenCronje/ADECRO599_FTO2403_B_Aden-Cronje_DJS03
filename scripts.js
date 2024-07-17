@@ -74,13 +74,13 @@ if (
   document.documentElement.style.setProperty("--color-light", "255, 255, 255");
 }
 
-createNewElements.listButtons.innerText = `Show more (${
+callingElements.listButtons.innerText = `Show more (${
   books.length - BOOKS_PER_PAGE
 })`;
-createNewElements.listButtons.disabled =
+callingElements.listButtons.disabled =
   matches.length - page * BOOKS_PER_PAGE > 0;
 
-createNewElements.listButtons.innerHTML = `
+callingElements.listButtons.innerHTML = `
     <span>Show more</span>
     <span class="list__remaining"> (${
       matches.length - page * BOOKS_PER_PAGE > 0
@@ -90,29 +90,29 @@ createNewElements.listButtons.innerHTML = `
 `;
 
 // Navigation bar/ search bar section
-createNewElements.cancelButton.addEventListener("click", () => {
-  createNewElements.searchOverlay.open = false;
+callingElements.cancelButton.addEventListener("click", () => {
+  callingElements.searchOverlay.open = false;
 });
 
-createNewElements.settingsCancel.addEventListener("click", () => {
-  createNewElements.settingsOverlay.open = false;
+callingElements.settingsCancel.addEventListener("click", () => {
+  callingElements.settingsOverlay.open = false;
 });
 
-createNewElements.headerSearch.addEventListener("click", () => {
-  createNewElements.searchOverlay.open = true;
-  createNewElements.searchTitle.focus();
+callingElements.headerSearch.addEventListener("click", () => {
+  callingElements.searchOverlay.open = true;
+  callingElements.searchTitle.focus();
 });
 
-headerSettings.addEventListener("click", () => {
-  createNewElements.settingsOverlay.open = true;
+callingElements.headerSettings.addEventListener("click", () => {
+  callingElements.settingsOverlay.open = true;
 });
 
-createNewElements.listClose.addEventListener("click", () => {
-  createNewElements.activeList.open = false;
+callingElements.listClose.addEventListener("click", () => {
+  callingElements.activeList.open = false;
 });
 
 // Dark and light mode toggle from navigation bar
-createNewElements.settingsForm.addEventListener("submit", (event) => {
+callingElements.settingsForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
   const { theme } = Object.fromEntries(formData);
@@ -128,11 +128,11 @@ createNewElements.settingsForm.addEventListener("submit", (event) => {
     );
   }
 
-  createNewElements.settingsOverlay.open = false;
+  callingElements.settingsOverlay.open = false;
 });
 
 // Filtering search results from selected title/ genre / author
-createNewElements.searchForm.addEventListener("submit", (event) => {
+callingElements.searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
   const filters = Object.fromEntries(formData);
@@ -162,12 +162,12 @@ createNewElements.searchForm.addEventListener("submit", (event) => {
   matches = result;
 
   if (result.length < 1) {
-    createNewElements.listMessage.classList.add("list__message_show");
+    callingElements.listMessage.classList.add("list__message_show");
   } else {
-    createNewElements.listMessage.classList.remove("list__message_show");
+    callingElements.listMessage.classList.remove("list__message_show");
   }
 
-  createNewElements.listItems.innerHTML = "";
+  callingElements.listItems.innerHTML = "";
   const newItems = newDocument;
 
   for (const { author, id, image, title } of result.slice(0, BOOKS_PER_PAGE)) {
@@ -190,11 +190,11 @@ createNewElements.searchForm.addEventListener("submit", (event) => {
     newItems.appendChild(element);
   }
 
-  createNewElements.listItems.appendChild(newItems);
-  createNewElements.listButtons.disabled =
+  callingElements.listItems.appendChild(newItems);
+  callingElements.listButtons.disabled =
     matches.length - page * BOOKS_PER_PAGE < 1;
 
-  createNewElements.listButtons.innerHTML = `
+  callingElements.listButtons.innerHTML = `
         <span>Show more</span>
         <span class="list__remaining"> (${
           matches.length - page * BOOKS_PER_PAGE > 0
@@ -204,10 +204,10 @@ createNewElements.searchForm.addEventListener("submit", (event) => {
     `;
 
   window.scrollTo({ top: 0, behavior: "smooth" });
-  createNewElements.searchOverlay.open = false;
+  callingElements.searchOverlay.open = false;
 });
 
-createNewElements.listButtons.addEventListener("click", () => {
+callingElements.listButtons.addEventListener("click", () => {
   const fragment = newDocument;
 
   for (const { author, id, image, title } of matches.slice(
@@ -233,11 +233,11 @@ createNewElements.listButtons.addEventListener("click", () => {
     fragment.appendChild(element);
   }
 
-  createNewElements.listItems.appendChild(fragment);
+  callingElements.listItems.appendChild(fragment);
   page += 1;
 });
 
-createNewElements.listItems.addEventListener("click", (event) => {
+callingElements.listItems.addEventListener("click", (event) => {
   const pathArray = Array.from(event.path || event.composedPath());
   let active = null;
 
@@ -258,13 +258,13 @@ createNewElements.listItems.addEventListener("click", (event) => {
 
   // Modal appear's after a sprcific book is pressed
   if (active) {
-    createNewElements.activeList.open = true;
-    createNewElements.listBlur.src = active.image;
-    createNewElements.listImage.src = active.image;
-    createNewElements.listTitle.innerText = active.title;
-    docreateNewElements.listSubtitle.innerText = `${
+    callingElements.activeList.open = true;
+    callingElements.listBlur.src = active.image;
+    callingElements.listImage.src = active.image;
+    callingElements.listTitle.innerText = active.title;
+    callingElements.listSubtitle.innerText = `${
       authors[active.author]
     } (${new Date(active.published).getFullYear()})`;
-    createNewElements.listDescription.innerText = active.description;
+    callingElements.listDescription.innerText = active.description;
   }
 });
