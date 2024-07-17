@@ -1,5 +1,9 @@
 import { books, authors, genres, BOOKS_PER_PAGE } from "./data.js";
-import { callingElements, createNewElements, newDocument } from "./functions.";
+import {
+  callingElements,
+  createNewElements,
+  newDocument,
+} from "./functions.js";
 
 let page = 1;
 let matches = books;
@@ -262,7 +266,7 @@ callingElements.listItems.addEventListener("click", (event) => {
     callingElements.listBlur.src = active.image;
     callingElements.listImage.src = active.image;
     callingElements.listTitle.innerText = active.title;
-    callingElements.listSubtitle.innerText = `${
+    callingElements.listSubtitel.innerText = `${
       authors[active.author]
     } (${new Date(active.published).getFullYear()})`;
     callingElements.listDescription.innerText = active.description;
