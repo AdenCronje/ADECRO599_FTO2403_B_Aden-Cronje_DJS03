@@ -2,7 +2,7 @@ function createNewElements(type) {
   return document.createElement(type);
 }
 
-const selectorElements = {
+const callingElements = {
   listItems: document.querySelector("[data-list-items]"), //(5)
   searchGenres: document.querySelector("[data-search-genres]"), //(1)
   searchAuthors: document.querySelector("[data-search-authors]"), //(1)
