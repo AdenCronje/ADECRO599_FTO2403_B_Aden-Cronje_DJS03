@@ -11,26 +11,40 @@ let matches = books;
 const starting = newDocument;
 
 for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
-  const element = createNewElements("button");
-  element.classList = "preview";
-  element.setAttribute("data-preview", id);
+}
+class CreateCustomElement extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
 
-  element.innerHTML = `
-        <img
-            class="preview__image"
-            src="${image}"
-        />
-        
-        <div class="preview__info">
-            <h3 class="preview__title">${title}</h3>
-            <div class="preview__author">${authors[author]}</div>
-        </div>
-    `;
-
-  starting.appendChild(element);
+    const customElement = createNewElements("button");
+    const author = this.getAttribute(`${authors[author]}`);
+    const id = this.getAttribute(id);
+    const image = this.getAttribute(image);
+    const title = this.getAttribute(title);
+  }
 }
 
-callingElements.listItems.appendChild(starting);
+// const element = createNewElements("button");
+// element.classList = "preview";
+// element.setAttribute("data-preview", id);
+
+//   element.innerHTML = `
+//         <img
+//             class="preview__image"
+//             src="${image}"
+//         />
+
+//         <div class="preview__info">
+//             <h3 class="preview__title">${title}</h3>
+//             <div class="preview__author">${authors[author]}</div>
+//         </div>
+//     `;
+
+//   starting.appendChild(element);
+// }
+
+// callingElements.listItems.appendChild(starting);
 
 // Creates different book genre's
 function createGenre() {
