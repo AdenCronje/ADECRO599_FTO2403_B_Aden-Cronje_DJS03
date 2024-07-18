@@ -18,13 +18,24 @@ class CreateCustomElement extends HTMLElement {
     this.attachShadow({ mode: "open" });
 
     const customElement = createNewElements("button");
-    const author = this.getAttribute(`${authors[author]}`);
-    const id = this.getAttribute(id);
-    const image = this.getAttribute(image);
-    const title = this.getAttribute(title);
+    const author = this.getAttribute("author");
+    const id = this.getAttribute("id");
+    const image = this.getAttribute("image");
+    const title = this.getAttribute("title");
+
+    customElement = `
+    <img class="preview__image" src="${image}"/>
+
+<div class="preview__info">
+<h3 class="preview__title">${title}</h3>
+<div class="preview__author">${authors[author]}
+</div>
+    `;
+    starting.appendChild(customElement);
   }
 }
 
+callingElements.listItems.appendChild(starting);
 // const element = createNewElements("button");
 // element.classList = "preview";
 // element.setAttribute("data-preview", id);
