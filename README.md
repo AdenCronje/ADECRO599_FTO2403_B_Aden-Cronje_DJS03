@@ -23,3 +23,4 @@
 genreElement = document.createElement("option)
 } -->
 *Functions for each document.createFragment
+*Can change day and night styling 

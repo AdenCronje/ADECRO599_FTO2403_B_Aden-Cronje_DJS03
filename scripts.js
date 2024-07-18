@@ -46,11 +46,10 @@ function createGenre() {
     element.innerText = name;
     genreHtml.appendChild(element);
   }
+  callingElements.searchGenres.appendChild(genreHtml);
 }
 
 createGenre();
-
-callingElements.searchGenres.appendChild(genreHtml);
 
 // Give's authors names for each book that's generated
 function createAuthor() {
@@ -188,8 +187,6 @@ callingElements.searchForm.addEventListener("submit", (event) => {
       result.push(book);
     }
   }
-
-
 
   page = 1;
   matches = result;
