@@ -24,3 +24,11 @@ genreElement = document.createElement("option)
 } -->
 *Functions for each document.createFragment
 *Can change day and night styling 
+
+What I learnt:
+-Learned how it's important to keep your codebase as neat and readable as possible, to prevent bugs and just make it easier to see what going on.
+-I've also learnt how it's also maybe a good idea to put certain functions in there own files to further abstaract.
+
+Challenges:
+-Learning how to create a web component
+- Using classes

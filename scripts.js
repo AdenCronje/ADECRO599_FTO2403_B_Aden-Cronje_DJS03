@@ -12,6 +12,7 @@ const starting = newDocument;
 
 for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
 }
+// Creates html element to display a book and all it's relevant data
 class CreateCustomElement extends HTMLElement {
   constructor() {
     super();
@@ -22,8 +23,9 @@ class CreateCustomElement extends HTMLElement {
     const id = this.getAttribute("id");
     const image = this.getAttribute("image");
     const title = this.getAttribute("title");
+    customElement.setAttribute("data-preview", id);
 
-    customElement = `
+    customElement.innerHTML = `
     <img class="preview__image" src="${image}"/>
 
 <div class="preview__info">
