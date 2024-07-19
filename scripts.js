@@ -14,15 +14,11 @@ const starting = newDocument;
 // }
 // Creates html element to display a book and all it's relevant data
 class CreateCustomElement extends HTMLElement {
-  constructor() {
+  constructor(author, id, image, title) {
     super();
     this.attachShadow({ mode: "open" });
 
     const customElement = createNewElements("button");
-    const author = this.getAttribute("author");
-    const id = this.getAttribute("id");
-    const image = this.getAttribute("image");
-    const title = this.getAttribute("title");
     customElement.setAttribute("data-preview", id);
 
     customElement.innerHTML = `
