@@ -10,8 +10,8 @@ let matches = books;
 
 const starting = newDocument;
 
-for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
-}
+// for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
+// }
 // Creates html element to display a book and all it's relevant data
 class CreateCustomElement extends HTMLElement {
   constructor() {
@@ -30,14 +30,14 @@ class CreateCustomElement extends HTMLElement {
 
 <div class="preview__info">
 <h3 class="preview__title">${title}</h3>
-<div class="preview__author">${authors[author]}
+<div class="preview__author">${author}
 </div>
     `;
-    starting.appendChild(customElement);
+    this.shadowRoot.appendChild(customElement);
   }
 }
 
-callingElements.listItems.appendChild(starting);
+customElements.define("custom-button", CreateCustomElement);
 // const element = createNewElements("button");
 // element.classList = "preview";
 // element.setAttribute("data-preview", id);
