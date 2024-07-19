@@ -10,27 +10,38 @@ let matches = books;
 
 const starting = newDocument;
 
-for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
-  const element = createNewElements("button");
-  element.classList = "preview";
-  element.setAttribute("data-preview", id);
+// Creates html element to display a book and all it's relevant data
+class CreateCustomButton extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
 
-  element.innerHTML = `
-        <img
-            class="preview__image"
-            src="${image}"
-        />
-        
-        <div class="preview__info">
-            <h3 class="preview__title">${title}</h3>
-            <div class="preview__author">${authors[author]}</div>
-        </div>
+  connectedCallback() {
+    const id = this.getAttribute("data-preview");
+    const author = this.getAttribute("data-author");
+    const image = this.getAttribute("data-image");
+    const title = this.getAttribute("data-title");
+
+    const element = createNewElements("button");
+    element.setAttribute("data-preview", id);
+
+    element.innerHTML = `
+    <img class="preview__image" src="${image}"/>
+
+<div class="preview__info">
+<h3 class="preview__title">${title}</h3>
+<div class="preview__author">${author}</div>
+</div>
     `;
 
-  starting.appendChild(element);
+    element.appendChild(starting);
+  }
 }
 
-callingElements.listItems.appendChild(starting);
+customElements.define("custom-button", CreateCustomButton);
+for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
+}
 
 // Creates different book genre's
 function createGenre() {
