@@ -11,7 +11,7 @@ const callingElements = {
   listButtons: document.querySelector("[data-list-button]"), //all clickable nuttons on the page
   cancelButton: document.querySelector("[data-search-cancel]"), //search data cancel button on modal
   settingsCancel: document.querySelector("[data-settings-cancel]"), //cancels search settings modal
-  searchOverlay: document.querySelector("[data-search-overlay]"), //search data input 
+  searchOverlay: document.querySelector("[data-search-overlay]"), //search data input
   settingsOverlay: document.querySelector("[data-settings-overlay]"), //displays all settings on modal
   headerSearch: document.querySelector("[data-header-search]"), //displays search button
   searchTitle: document.querySelector("[data-search-title]"), //displays header svg

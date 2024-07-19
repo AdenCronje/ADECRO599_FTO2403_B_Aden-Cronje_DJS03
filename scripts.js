@@ -30,7 +30,7 @@ class CreateCustomElement extends HTMLElement {
 
 <div class="preview__info">
 <h3 class="preview__title">${title}</h3>
-<div class="preview__author">${author}
+<div class="preview__author">${author}</div>
 </div>
     `;
     this.shadowRoot.appendChild(customElement);
@@ -38,9 +38,11 @@ class CreateCustomElement extends HTMLElement {
 }
 
 customElements.define("custom-button", CreateCustomElement);
-// const element = createNewElements("button");
-// element.classList = "preview";
-// element.setAttribute("data-preview", id);
+
+// for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
+//   const element = createNewElements("button");
+//   element.classList = "preview";
+//   element.setAttribute("data-preview", id);
 
 //   element.innerHTML = `
 //         <img
