@@ -10,8 +10,7 @@ let matches = books;
 
 const starting = newDocument;
 
-// for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
-// }
+
 // Creates html element to display a book and all it's relevant data
 class CreateCustomButton extends HTMLElement {
   constructor() {
